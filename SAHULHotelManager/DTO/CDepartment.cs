@@ -11,8 +11,8 @@ namespace SAHULHotelManager.DTO
         #region "Attribus"
         private int _id;                               // mã bộ phận
         private string _name;                          // tên bộ phận
-        private int _departmentParentid;               // mã bộ phận cha
-        private CEmployee _chief;
+        private CDepartment _parent;                   // thông tin bộ phận cha
+        private CEmployee _chief;                      // thông tin trưởng bộ phận
         #endregion
 
         #region "Property"
@@ -50,19 +50,6 @@ namespace SAHULHotelManager.DTO
             }
         }
 
-        public int DepartmentParentid
-        {
-            get
-            {
-                return _departmentParentid;
-            }
-
-            set
-            {
-                _departmentParentid = value;
-            }
-        }
-
         public CEmployee Chief
         {
             get
@@ -75,6 +62,30 @@ namespace SAHULHotelManager.DTO
                 _chief = value;
             }
         }
+
+        public CDepartment Parent
+        {
+            get
+            {
+                return _parent;
+            }
+
+            set
+            {
+                _parent = value;
+            }
+        }
+        public int ParentID
+        {
+            get
+            {
+                return Parent.Id;
+            }
+            set
+            {
+                Parent.Id = value;
+            }
+        }
         #endregion
 
         #region "Constructor"
@@ -82,28 +93,28 @@ namespace SAHULHotelManager.DTO
         {
             this.Id = 0;
             this.Name = String.Empty;
-            this.DepartmentParentid = 0;
+            this.ParentID = 0;
             this.Chief = new CEmployee();
         }
         public CDepartment(CDepartment CDepartment)
         {
             this.Id = CDepartment.Id;
             this.Name = CDepartment.Name;
-            this.DepartmentParentid = CDepartment.DepartmentParentid;
+            this.ParentID = CDepartment.ParentID;
             this.Chief = CDepartment.Chief;
         }
-        public CDepartment(int id, string name, int departmantParentid)
+        public CDepartment(int id, string name, int ParentID)
         {
             this.Id = id;
             this.Name = name;
-            this.DepartmentParentid = departmantParentid;
+            this.ParentID = 0;
             this.Chief = null;
         }
-        public CDepartment(int id, string name, int departmantParentid, CEmployee chief)
+        public CDepartment(int id, string name, int parentID, CEmployee chief)
         {
             this.Id = id;
             this.Name = name;
-            this.DepartmentParentid = departmantParentid;
+            this.ParentID = parentID;
             this.Chief = chief;
         }
         #endregion
@@ -113,7 +124,7 @@ namespace SAHULHotelManager.DTO
         {
             return "ID: " + Id + '\n'
                    + "Name: " + Name + '\n'
-                   + "Department Parent ID: " + DepartmentParentid + '\n'
+                   + "Department Parent ID: " + ParentID + '\n'
                    + "Chief: " + Chief.ToString;
         }
 
